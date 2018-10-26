@@ -2,7 +2,7 @@
   <div class="counter">
     <b-row align="center">
       <b-col>
-        <h1>Clicked <b-badge> {{ count }} </b-badge> times! Count is <b-badge>{{ parity }}</b-badge> </h1>
+        <h1>Clicked <b-badge> {{ $store.state.count }} </b-badge> times! Count is <b-badge>{{ parity }}</b-badge> </h1>
       </b-col>
     </b-row>
     <b-row align="center">
@@ -19,36 +19,20 @@
 </template>
 
 <script>
-  export default {
-    data: function() {
-      return {
-        count: 0
-      }
-    },
-    computed: {
-      parity: function() {
-        return this.count % 2  === 0 ? 'even' : 'odd'
-      }
-    },
-    methods: {
-      increment: function() {
-        this.count++;
-      },
-      decrement: function() {
-        this.count--
-      },
-      incrementIfOdd: function() {
-        if (this.parity === 'odd') {
-          this.increment();
-        }
-      },
-      incrementAsync: async function() {
-        return await setTimeout(() => {
-          this.increment()
-        }, 1000)
-      }
-    }
-  }
+
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  computed: mapGetters([
+    'parity'
+  ]),
+  methods: mapActions([
+    'increment',
+    'decrement',
+    'incrementIfOdd',
+    'incrementAsync'
+  ])
+}
 </script>
 
 <style scoped>
