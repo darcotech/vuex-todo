@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <b-jumbotron  bg-variant="info" text-variant="white">
+      <template slot="header">
+        Getting Started with Vuex
+      </template>
+      <template slot="lead">
+        Built using Bootstrap-Vue.js
+      </template>
+    </b-jumbotron>
+
+    <b-container>
+      <b-nav pills>
+        <router-link class="nav-link" to="/" exact>Counter</router-link>
+        <router-link class="nav-link" to="/todo">Todo</router-link>
+      </b-nav>
+      <router-view/>
+    </b-container>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.active {
+  background-color: #17A2B8 !important;
 }
 </style>
