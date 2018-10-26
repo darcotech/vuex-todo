@@ -1,6 +1,7 @@
 <template>
   <div class="counter-page">
     <h2>Counter Demo</h2>
+    <hr>
     <Counter />
   </div>
 </template>
