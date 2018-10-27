@@ -1,6 +1,6 @@
 <template>
   <div class="todo-page">
-    <h2>TODO Demo</h2>
+    <h2>Shopping List</h2>
     <hr>
     <Todo />
   </div>
