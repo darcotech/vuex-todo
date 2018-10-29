@@ -18,11 +18,17 @@
     <b-row>
       <b-col>
         <b-list-group class="w-75 mb-1">
-          <b-list-group-item>Cras justo odio</b-list-group-item>
-          <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-          <b-list-group-item>Morbi leo risus</b-list-group-item>
-          <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-          <b-list-group-item>Vestibulum at eros</b-list-group-item>
+          <b-list-group-item class="row">
+            <b-col cols="1">
+              <b-form-checkbox> </b-form-checkbox>
+            </b-col>
+            <b-col cols="10">
+              Cras justo odio
+            </b-col>
+            <b-col cols="1">
+              <b-button-close></b-button-close>
+            </b-col>
+          </b-list-group-item>
         </b-list-group>
       </b-col>
     </b-row>
@@ -39,5 +45,8 @@ form {
 }
 input {
   margin-right: 25px;
+}
+.list-group-item {
+  display: flex;
 }
 </style>
