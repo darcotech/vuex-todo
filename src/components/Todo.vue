@@ -17,12 +17,12 @@
     <b-row>
       <b-col>
         <b-list-group class=" mb-1">
-          <b-list-group-item class="row">
+          <b-list-group-item class="row" v-for="(item, index) in items" :key="index">
             <b-col cols="1">
-              <b-form-checkbox> </b-form-checkbox>
+              <b-form-checkbox id="done" v-model="item.done"> </b-form-checkbox>
             </b-col>
             <b-col cols="10">
-              Cras justo odio
+              {{ item.name }}
             </b-col>
             <b-col cols="1">
               <b-button-close></b-button-close>
@@ -35,7 +35,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
+export default {
+  computed: {
+    ...mapState('todo',[
+      'items'
+    ])
+  }
+}
 </script>
 
 <style>
