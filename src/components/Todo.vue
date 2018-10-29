@@ -17,9 +17,9 @@
     <b-row>
       <b-col>
         <b-list-group class=" mb-1">
-          <b-list-group-item class="row" v-for="(item, index) in items" :key="index">
+          <b-list-group-item class="row" v-for="(item, index) in items" :key="index" v-bind:class="{ checked: item.done}  ">
             <b-col cols="1">
-              <b-form-checkbox id="done" v-model="item.done"> </b-form-checkbox>
+              <b-form-checkbox :id="'done-' + index" v-model="item.done"> </b-form-checkbox>
             </b-col>
             <b-col cols="10">
               {{ item.name }}
@@ -55,5 +55,11 @@ form {
 }
 .list-group-item:hover{
   background-color: aliceblue;
+}
+.checked {
+  font-style: italic;
+  text-decoration: line-through;
+  color: gray;
+  background-color: #eeeeee;
 }
 </style>
