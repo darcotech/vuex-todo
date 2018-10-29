@@ -16,5 +16,19 @@ export default {
         done: false
       }
     ]
+  },
+  mutations: {
+    addItem(state, item) {
+      state.items.push(item)
+    }
+  },
+  actions: {
+    addItem({commit}, item) {
+      console.log(item)
+      commit("addItem",{
+        name: 'Booba',
+        done:false
+      })
+    }
   }
 }

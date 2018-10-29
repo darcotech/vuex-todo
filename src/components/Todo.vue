@@ -1,17 +1,19 @@
 <template>
   <div class="todo">
-    <b-form class="row">
+    <b-form class="row" @submit.prevent="addItem">
       <b-col cols="10" style="paddingLeft:0">
         <b-form-input
             id="item"
             class="w-100"
             name="item"
+            type="text"
             placeholder="Enter Item"
+            v-model="item"
             required>
           </b-form-input>
       </b-col>
       <b-col cols="2">
-        <b-button variant="primary">Add Task</b-button>
+        <b-button type="submit" variant="primary">Add Task</b-button>
       </b-col>
     </b-form>
     <b-row>
@@ -35,12 +37,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
+  data() {
+    return {
+      item:''
+    }
+  },
   computed: {
-    ...mapState('todo',[
+    ...mapState('todo', [
       'items'
+    ])
+  },
+  methods: {
+    ...mapActions('todo', [
+      'addItem'
     ])
   }
 }
