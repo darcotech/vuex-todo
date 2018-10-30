@@ -24,9 +24,8 @@ export default {
   },
   actions: {
     addItem({commit}, item) {
-      console.log(item)
       commit("addItem",{
-        name: 'Booba',
+        name: item,
         done:false
       })
     }

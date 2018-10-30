@@ -1,6 +1,6 @@
 <template>
   <div class="todo">
-    <b-form class="row" @submit.prevent="addItem">
+    <b-form class="row" @submit.prevent="onSubmit">
       <b-col cols="10" style="paddingLeft:0">
         <b-form-input
             id="item"
@@ -53,7 +53,11 @@ export default {
   methods: {
     ...mapActions('todo', [
       'addItem'
-    ])
+    ]),
+    async onSubmit() {
+      // TODO: Validate
+      await this.addItem(this.item);
+    }
   }
 }
 </script>
