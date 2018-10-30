@@ -1,5 +1,12 @@
 <template>
   <div class="todo">
+    <b-row>
+      <b-col style="paddingLeft:0">
+         <b-alert v-if="errors.has('item')" show dismissible variant="danger">
+          {{ errors.first('item') }}
+        </b-alert>
+      </b-col>
+    </b-row>
     <b-form class="row" @submit.prevent="onSubmit">
       <b-col cols="10" style="paddingLeft:0">
         <b-form-input
@@ -9,7 +16,9 @@
             type="text"
             placeholder="Enter Item"
             v-model="item"
-            required>
+            v-validate="'required'"
+            autocomplete="off"
+          >
           </b-form-input>
       </b-col>
       <b-col cols="2">
@@ -55,8 +64,11 @@ export default {
       'addItem'
     ]),
     async onSubmit() {
-      // TODO: Validate
-      await this.addItem(this.item);
+      const result = await this.$validator.validateAll();
+      if(result) {
+        await this.addItem(this.item);
+        this.item='';
+      }
     }
   }
 }
