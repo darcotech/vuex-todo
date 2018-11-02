@@ -1,5 +1,5 @@
 <template>
-  <div class="todo">
+  <div class="todo-list">
     <b-row>
       <b-col style="paddingLeft:0">
          <b-alert v-if="errors.has('item')" show dismissible variant="danger">
@@ -30,7 +30,11 @@
         <b-list-group class=" mb-1">
           <b-list-group-item class="row" v-for="(item, index) in items" :key="index" v-bind:class="{ checked: item.done}  ">
             <b-col cols="1">
-              <b-form-checkbox :id="'done-' + index" v-model="item.done"> </b-form-checkbox>
+              <b-form-checkbox
+                :id="'done-' + index"
+                :checked="item.done"
+              >
+              </b-form-checkbox>
             </b-col>
             <b-col cols="10">
               {{ item.name }}
@@ -49,6 +53,7 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
+  name: 'TodoList',
   data() {
     return {
       item:''
@@ -61,7 +66,8 @@ export default {
   },
   methods: {
     ...mapActions('todo', [
-      'addItem'
+      'addItem',
+      'updateItem'
     ]),
     async onSubmit() {
       const result = await this.$validator.validateAll();
@@ -69,6 +75,12 @@ export default {
         await this.addItem(this.item);
         this.item='';
       }
+    },
+    async updateStatus(item) {
+      console.log('toggle')
+      console.log(item.done)
+      // this.$store.commit('updateItem', item)
+      await this.updateItem(item)
     }
   }
 }

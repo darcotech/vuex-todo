@@ -2,16 +2,16 @@
   <div class="todo-page">
     <h2>Shopping List</h2>
     <hr>
-    <Todo />
+    <TodoList />
   </div>
 </template>
 
 <script>
-  import Todo from '@/components/Todo.vue'
+  import TodoList from '@/components/TodoList.vue'
 
   export default {
     components: {
-      Todo
+      TodoList
     }
   }
 </script>

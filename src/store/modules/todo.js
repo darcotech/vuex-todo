@@ -20,6 +20,9 @@ export default {
   mutations: {
     addItem(state, item) {
       state.items.push(item)
+    },
+    updateItem(state, changedItem) {
+      state.items = state.items.map(item => item.name === changedItem.name ? changedItem : item)
     }
   },
   actions: {
@@ -28,6 +31,9 @@ export default {
         name: item,
         done:false
       })
+    },
+    updateItem({commit}, changedItem) {
+      commit("updateItem", changedItem)
     }
   }
 }
