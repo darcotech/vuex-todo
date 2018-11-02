@@ -8,7 +8,15 @@
       </b-form-checkbox>
     </b-col>
     <b-col cols="10">
-      {{ item.name }}
+      <span v-if="!editing" @dblclick="editing = true">{{ item.name }}</span>
+      <input class="edit"
+        v-show="editing"
+        v-focus="editing"
+        :value="item.name"
+        @keyup.enter="doneEdit"
+        @keyup.esc="cancelEdit"
+        @blur="doneEdit"
+      >
     </b-col>
     <b-col cols="1">
       <b-button-close @click="removeItem(item)"></b-button-close>
@@ -21,15 +29,44 @@ import { mapActions } from 'vuex'
 export default {
   name: 'TodoItem',
   props: ['item'],
+  data () {
+    return {
+      editing: false
+    }
+  },
+  directives: {
+    focus (el, { value }, { context }) {
+      if (value) {
+        context.$nextTick(() => {
+          el.focus()
+        })
+      }
+    }
+  },
   methods: {
     ...mapActions('todo', [
-      'toggleItem'
+      'toggleItem',
+      'editItem'
     ]),
     changeItemStatus(item) {
       this.toggleItem(item);
     },
     removeItem(item) {
       this.$store.commit("todo/removeItem", item)
+    },
+    doneEdit(event) {
+      const value = event.target.value.trim();
+      const { item } = this;
+      if (!value) {
+        this.removeItem(item)
+      } else if (this.editing) {
+        this.editItem({ item, name:value });
+        this.editing = false
+      }
+    },
+    cancelEdit(event){
+      event.target.value = this.item.name;
+      this.editing = false;
     }
   }
 }

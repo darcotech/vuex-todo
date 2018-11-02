@@ -37,8 +37,8 @@ export default {
         done:false
       })
     },
-    editItem({commit}, item)  {
-      commit("editItem", {item, done: !item.done })
+    editItem({commit}, { item, name } )  {
+      commit("editItem", {item, name })
     },
     toggleItem({ commit }, item) {
       commit("editItem", { item, done: !item.done })
