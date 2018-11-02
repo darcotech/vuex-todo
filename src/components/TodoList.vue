@@ -41,7 +41,7 @@
               {{ item.name }}
             </b-col>
             <b-col cols="1">
-              <b-button-close></b-button-close>
+              <b-button-close @click="removeItem(item)"></b-button-close>
             </b-col>
           </b-list-group-item>
         </b-list-group>
@@ -79,6 +79,9 @@ export default {
     },
     async changeItemStatus(item) {
       await this.toggleItem(item);
+    },
+    removeItem(item) {
+      this.$store.commit("todo/removeItem", item)
     }
   }
 }

@@ -25,6 +25,9 @@ export default {
     editItem(state, { item, name=item.name, done=item.done }) {
       item.name = name;
       item.done = done;
+    },
+    removeItem(state, item) {
+      state.items.splice(state.items.indexOf(item), 1)
     }
   },
   actions: {
