@@ -9,9 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
-Vue.use(VeeValidate, {
-  events: 'change' // Validate on submit
-});
+Vue.use(VeeValidate);
 
 new Vue({
   router,

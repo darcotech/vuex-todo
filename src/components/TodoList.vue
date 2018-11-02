@@ -59,10 +59,11 @@ export default {
       'addItem',
     ]),
     async onSubmit() {
-      const result = await this.$validator.validateAll();
-      if(result) {
+      const isvalid = await this.$validator.validateAll();
+      if(isvalid) {
         await this.addItem(this.item);
         this.item=''; // Clear form after successful save
+        this.$validator.reset();
       }
     },
   }
