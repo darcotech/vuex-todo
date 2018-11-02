@@ -33,6 +33,7 @@
               <b-form-checkbox
                 :id="'done-' + index"
                 :checked="item.done"
+                @change="changeItemStatus(item)"
               >
               </b-form-checkbox>
             </b-col>
@@ -67,7 +68,7 @@ export default {
   methods: {
     ...mapActions('todo', [
       'addItem',
-      'updateItem'
+      'toggleItem'
     ]),
     async onSubmit() {
       const result = await this.$validator.validateAll();
@@ -76,11 +77,8 @@ export default {
         this.item='';
       }
     },
-    async updateStatus(item) {
-      console.log('toggle')
-      console.log(item.done)
-      // this.$store.commit('updateItem', item)
-      await this.updateItem(item)
+    async changeItemStatus(item) {
+      await this.toggleItem(item);
     }
   }
 }
@@ -98,7 +96,7 @@ form {
 }
 .checked {
   font-style: italic;
-  text-decoration: line-through;
+  text-decoration: line-through !important;
   color: gray;
   background-color: #eeeeee;
 }

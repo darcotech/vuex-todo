@@ -21,7 +21,7 @@ export default {
     addItem(state, item) {
       state.items.push(item)
     },
-    updateItem(state, changedItem) {
+    editItem(state, changedItem) {
       state.items = state.items.map(item => item.name === changedItem.name ? changedItem : item)
     }
   },
@@ -32,8 +32,11 @@ export default {
         done:false
       })
     },
-    updateItem({commit}, changedItem) {
-      commit("updateItem", changedItem)
-    }
+    editItem({commit}, item)  {
+      commit("editItem", {item, done: !item.done })
+    },
+    toggleItem({ commit }, targetItem) {
+      commit("editItem", { name:targetItem.name, done:!targetItem.done });
+    },
   }
 }
