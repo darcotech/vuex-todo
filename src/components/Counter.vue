@@ -22,6 +22,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'Counter',
   computed: {
     ...mapState('counter', [
       'count'

@@ -28,22 +28,7 @@
     <b-row>
       <b-col>
         <b-list-group class=" mb-1">
-          <b-list-group-item class="row" v-for="(item, index) in items" :key="index" v-bind:class="{ checked: item.done}  ">
-            <b-col cols="1">
-              <b-form-checkbox
-                :id="'done-' + index"
-                :checked="item.done"
-                @change="changeItemStatus(item)"
-              >
-              </b-form-checkbox>
-            </b-col>
-            <b-col cols="10">
-              {{ item.name }}
-            </b-col>
-            <b-col cols="1">
-              <b-button-close @click="removeItem(item)"></b-button-close>
-            </b-col>
-          </b-list-group-item>
+          <TodoItem v-for="(item, index) in items" :key="index" :item="item" />
         </b-list-group>
       </b-col>
     </b-row>
@@ -51,10 +36,14 @@
 </template>
 
 <script>
+import TodoItem from './TodoItem.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'TodoList',
+  components: {
+    TodoItem
+  },
   data() {
     return {
       item:''
@@ -68,21 +57,14 @@ export default {
   methods: {
     ...mapActions('todo', [
       'addItem',
-      'toggleItem'
     ]),
     async onSubmit() {
       const result = await this.$validator.validateAll();
       if(result) {
         await this.addItem(this.item);
-        this.item='';
+        this.item=''; // Clear form after successful save
       }
     },
-    async changeItemStatus(item) {
-      await this.toggleItem(item);
-    },
-    removeItem(item) {
-      this.$store.commit("todo/removeItem", item)
-    }
   }
 }
 </script>
