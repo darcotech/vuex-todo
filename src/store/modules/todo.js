@@ -21,8 +21,10 @@ export default {
     addItem(state, item) {
       state.items.push(item)
     },
-    editItem(state, changedItem) {
-      state.items = state.items.map(item => item.name === changedItem.name ? changedItem : item)
+    // Refer to ES6 Destructuring: https://github.com/lukehoban/es6features#destructuring
+    editItem(state, { item, name=item.name, done=item.done }) {
+      item.name = name;
+      item.done = done;
     }
   },
   actions: {
@@ -35,8 +37,8 @@ export default {
     editItem({commit}, item)  {
       commit("editItem", {item, done: !item.done })
     },
-    toggleItem({ commit }, targetItem) {
-      commit("editItem", { name:targetItem.name, done:!targetItem.done });
+    toggleItem({ commit }, item) {
+      commit("editItem", { item, done: !item.done })
     },
   }
 }
