@@ -19,10 +19,10 @@
 </template>
 
 <script>
-
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'Counter',
   computed: mapGetters([
     'parity'
   ]),
