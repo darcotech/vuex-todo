@@ -19,13 +19,18 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Counter',
-  computed: mapGetters([
-    'parity'
-  ]),
+  computed: {
+    ...mapState([
+      'count'
+    ]),
+    ...mapGetters([
+      'parity'
+    ])
+  },
   methods: mapActions([
     'increment',
     'decrement',
