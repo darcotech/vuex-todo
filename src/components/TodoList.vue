@@ -1,43 +1,50 @@
 <template>
   <div class="todo-list">
+    <!-- start of todo form -->
     <b-row>
-      <b-col style="paddingLeft:0">
+      <b-col>
+        <!-- display validation error -->
          <b-alert v-if="errors.has('item')" show dismissible variant="danger">
           {{ errors.first('item') }}
         </b-alert>
       </b-col>
     </b-row>
+    <!-- post to onSubmit function -->
     <b-form class="row" @submit.prevent="onSubmit">
-      <b-col cols="10" style="paddingLeft:0">
+      <b-col cols="10">
+      <!-- bind to local `item` state -->
         <b-form-input
-            id="item"
-            class="w-100"
-            name="item"
-            type="text"
-            placeholder="Enter Item"
-            v-model="item"
-            v-validate="'required'"
-            autocomplete="off"
-          >
-          </b-form-input>
+          id="item"
+          class="w-100"
+          name="item"
+          type="text"
+          placeholder="What do you want to buy?"
+          v-model="item"
+          v-validate="'required'"
+          autocomplete="off"
+        ></b-form-input>
       </b-col>
       <b-col cols="2">
         <b-button type="submit" variant="primary">Add Task</b-button>
       </b-col>
     </b-form>
+    <!-- end of todo form -->
+
+    <!-- start of todo list -->
     <b-row>
-      <b-col>
-        <b-list-group class=" mb-1">
+      <b-col md="10">
+        <b-list-group>
           <TodoItem v-for="(item, index) in items" :key="index" :item="item" />
         </b-list-group>
       </b-col>
     </b-row>
+    <!-- end of todo list -->
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import TodoItem from './TodoItem.vue'
-import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'TodoList',
@@ -50,11 +57,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('todo', [
+    ...mapState([
       'items'
     ])
   },
-  methods: {
+   methods: {
     ...mapActions('todo', [
       'addItem',
     ]),
@@ -67,7 +74,7 @@ export default {
       }
     },
   }
-}
+};
 </script>
 
 <style>

@@ -2,25 +2,30 @@
   <div id="app">
    <b-jumbotron  bg-variant="info" text-variant="white">
       <template slot="header">
-        Getting Started with Vuex
+        <b-container>Vuex ToDo App</b-container>
       </template>
       <template slot="lead">
-        Built using Bootstrap-Vue.js
+        <b-container>Built using Bootstrap-Vue.js</b-container>
       </template>
     </b-jumbotron>
 
     <b-container>
-      <b-nav pills>
-        <router-link class="nav-link" to="/" exact>Counter</router-link>
-        <router-link class="nav-link" to="/todo">Todo</router-link>
-      </b-nav>
-      <router-view/>
+      <div class="todo-page">
+        <h2>Shopping List</h2>
+        <hr>
+        <TodoList />
+      </div>
     </b-container>
   </div>
 </template>
 
-<style>
-.active {
-  background-color: #17A2B8 !important;
-}
-</style>
+<script>
+  import TodoList from '@/components/TodoList.vue'
+
+  export default {
+    name: 'TodoView',
+    components: {
+      TodoList
+    }
+  }
+</script>

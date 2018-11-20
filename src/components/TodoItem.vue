@@ -1,31 +1,36 @@
 <template>
-  <b-list-group-item class="row" v-bind:class="{ checked: item.done }">
-    <b-col cols="1">
-      <b-form-checkbox
-        :checked="item.done"
-        @change="changeItemStatus(item)"
-      >
-      </b-form-checkbox>
-    </b-col>
-    <b-col cols="10">
-      <span v-if="!editing" @dblclick="editing = true">{{ item.name }}</span>
-      <input class="edit"
-        v-show="editing"
-        v-focus="editing"
-        :value="item.name"
-        @keyup.enter="doneEdit"
-        @keyup.esc="cancelEdit"
-        @blur="doneEdit"
-      >
-    </b-col>
-    <b-col cols="1">
-      <b-button-close @click="removeItem(item)"></b-button-close>
-    </b-col>
-  </b-list-group-item>
+  <div class="todo-item">
+    <b-list-group-item v-bind:class="{ checked: item.done }">
+      <b-row>
+        <b-col cols="1">
+          <b-form-checkbox
+            :checked="item.done"
+            @change="changeItemStatus(item)"
+          >
+          </b-form-checkbox>
+        </b-col>
+        <b-col cols="10">
+          <span v-if="!editing" @dblclick="editing = true">{{ item.name }}</span>
+          <input class="edit"
+            v-show="editing"
+            v-focus="editing"
+            :value="item.name"
+            @keyup.enter="doneEdit"
+            @keyup.esc="cancelEdit"
+            @blur="doneEdit"
+          >
+        </b-col>
+        <b-col cols="1">
+          <b-button-close @click="removeItem(item)"></b-button-close>
+        </b-col>
+      </b-row>
+    </b-list-group-item>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
   name: 'TodoItem',
   props: ['item'],
@@ -44,15 +49,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions('todo', [
+    ...mapActions([
       'toggleItem',
       'editItem'
     ]),
     changeItemStatus(item) {
       this.toggleItem(item);
     },
-    removeItem(item) {
-      this.$store.commit("todo/removeItem", item)
+     removeItem(item) {
+      this.$store.commit("removeItem", item)
     },
     doneEdit(event) {
       const value = event.target.value.trim();
@@ -69,5 +74,5 @@ export default {
       this.editing = false;
     }
   }
-}
+};
 </script>
